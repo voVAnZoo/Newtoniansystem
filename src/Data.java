@@ -4,7 +4,7 @@ import java.awt.*;
  * Created by Vova on 22.01.2018.
  */
 public class Data {
-    public static Dimension sSize = Toolkit.getDefaultToolkit ().getScreenSize ();
+    //public static Dimension sSize = Toolkit.getDefaultToolkit ().getScreenSize ();
 
     public static int friq = 1;
 
@@ -28,5 +28,9 @@ public class Data {
     public static boolean servWork = false;
     public static boolean clientWork = false;
 
+    public static class sSize{
+        public static int width = 1900;
+        public static int height = 1000;
+    }
 
 }

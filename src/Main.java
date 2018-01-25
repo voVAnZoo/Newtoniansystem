@@ -10,6 +10,7 @@ public class Main {
 
     public static void init(){
 
+        System.out.println(Data.sSize.width + " " + Data.sSize.height);
         Data.gp = new GamePlace();
         Psub i = new Psub(1,0,0,0,0,0.01,0.01,0);
         Data.gp.add(i);

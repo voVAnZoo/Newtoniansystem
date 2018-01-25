@@ -3,6 +3,8 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Newtoniansystem_jar</output-path>
     <root id="archive" name="Newtoniansystem.jar">
       <element id="module-output" name="Newtoniansystem" />
+      <element id="file-copy" path="$PROJECT_DIR$/maxresdefault.jpg" />
+      <element id="file-copy" path="$PROJECT_DIR$/st.png" />
     </root>
   </artifact>
 </component>
