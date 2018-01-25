@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -34,7 +35,7 @@ public class MyKeyListener implements KeyListener {
             Server.start();
         }
         if(e.getKeyCode() == KeyEvent.VK_C && Data.ctrl){
-            Client.start();
+            Client.start(JOptionPane.showInputDialog("введите IP"));
         }
     }
 

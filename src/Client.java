@@ -6,13 +6,13 @@ import java.net.Socket;
  * Created by Vova on 25.01.2018.
  */
 public class Client {
-    public static void start(){
+    public static void start(String s){
         Data.clientWork = true;
         Thread clientThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Socket socket = new Socket("25.82.192.177", 533);
+                    Socket socket = new Socket(s, 533);
 
                     DataOutputStream oos = new DataOutputStream(socket.getOutputStream());
                     DataInputStream ois = new DataInputStream(socket.getInputStream());
