@@ -22,7 +22,9 @@ public class Client {
                     Data.gp.allsub.add(sevrSub);
 
                     while(!socket.isOutputShutdown()){
-                        oos.writeUTF(Data.gp.allplayer.get(0).getX() + "%" + Data.gp.allplayer.get(0).getY() + "%" + Data.gp.allplayer.get(0).getPhi());
+                        oos.writeUTF(Data.gp.allplayer.get(0).getX() + "%"
+                                + Data.gp.allplayer.get(0).getY() + "%"
+                                + Data.gp.allplayer.get(0).getPhi());
                         oos.flush();
 
                         read(ois);
@@ -43,7 +45,8 @@ public class Client {
                 try {
                     String entry = in.readUTF();
                     Data.gp.allsub.get(0).setX(Double.parseDouble(entry.substring(0, entry.indexOf('%'))));
-                    Data.gp.allsub.get(0).setY(Double.parseDouble(entry.substring(entry.indexOf('%') + 1, entry.lastIndexOf('%'))));
+                    Data.gp.allsub.get(0).setY(Double.parseDouble(
+                            entry.substring(entry.indexOf('%') + 1, entry.lastIndexOf('%'))));
                     Data.gp.allsub.get(0).setPhi(Double.parseDouble(entry.substring(entry.lastIndexOf('%')+1)));
 
                 }catch (Exception e){

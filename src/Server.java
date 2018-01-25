@@ -28,12 +28,12 @@ public class Server {
                     DataInputStream in = new DataInputStream(client.getInputStream());
 
                     while(!client.isClosed()){
-
                         read(in);
 
-                        out.writeUTF(Data.gp.allplayer.get(0).getX() + "%" + Data.gp.allplayer.get(0).getY() + "%" + Data.gp.allplayer.get(0).getPhi());
+                        out.writeUTF(Data.gp.allplayer.get(0).getX() + "%"
+                                + Data.gp.allplayer.get(0).getY() + "%"
+                                + Data.gp.allplayer.get(0).getPhi());
                         out.flush();
-
                     }
 
                     in.close();
@@ -54,11 +54,13 @@ public class Server {
                 try {
                     String entry = in.readUTF();
                     Data.gp.allsub.get(0).setX(Double.parseDouble(entry.substring(0, entry.indexOf('%'))));
-                    Data.gp.allsub.get(0).setY(Double.parseDouble(entry.substring(entry.indexOf('%') + 1, entry.lastIndexOf('%'))));
+                    Data.gp.allsub.get(0).setY(Double.parseDouble(
+                            entry.substring(entry.indexOf('%') + 1, entry.lastIndexOf('%'))));
                     Data.gp.allsub.get(0).setPhi(Double.parseDouble(entry.substring(entry.lastIndexOf('%')+1)));
-                    System.out.println(Double.parseDouble(entry.substring(0, entry.indexOf('%'))));
-                    System.out.println(Double.parseDouble(entry.substring(entry.indexOf('%') + 1, entry.lastIndexOf('%'))));
-                    System.out.println(Double.parseDouble(entry.substring(entry.lastIndexOf('%')+1)));
+                    /*System.out.println(Double.parseDouble(entry.substring(0, entry.indexOf('%'))));
+                    System.out.println(Double.parseDouble(
+                    entry.substring(entry.indexOf('%') + 1, entry.lastIndexOf('%'))));
+                    System.out.println(Double.parseDouble(entry.substring(entry.lastIndexOf('%')+1)));*/
                 }catch (Exception e){
                     e.printStackTrace();
                     read(in);

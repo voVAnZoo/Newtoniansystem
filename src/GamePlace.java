@@ -23,7 +23,8 @@ public class GamePlace {
     List<Psub> allplayer = new ArrayList<Psub>();
 
     public void draw(Graphics2D g2){
-        g2.drawImage(img, (int)(-Data.camX), (int)(-Data.camY), (int) (Data.sSize.width * Data.camSize), (int) (Data.sSize.height * Data.camSize),null);
+        g2.drawImage(img, (int)(-Data.camX), (int)(-Data.camY),
+                (int) (Data.sSize.width * Data.camSize), (int) (Data.sSize.height * Data.camSize),null);
 
         for(int i = 0;i < allsub.size();i++){
             allsub.get(i).draw(g2);

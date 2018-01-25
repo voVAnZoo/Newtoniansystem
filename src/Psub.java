@@ -39,10 +39,12 @@ public class Psub extends Subject {
 
         try {
 
-            affine.rotate(Math.toRadians(this.phi), (int)(x*Data.camSize - Data.camX) +  (int)(width*Data.camSize)/ 2,
-                    (int)(y*Data.camSize - Data.camY) + (int)(height*Data.camSize) / 2);
+            affine.rotate(Math.toRadians(this.phi), (int)(x*Data.camSize - Data.camX)
+                    +  (int)(width*Data.camSize)/ 2, (int)(y*Data.camSize - Data.camY)
+                    + (int)(height*Data.camSize) / 2);
             g2.setTransform(affine);
-            g2.drawImage(img,(int)(x*Data.camSize - Data.camX),(int)(y*Data.camSize - Data.camY),(int)(width*Data.camSize),(int)(height*Data.camSize),null);
+            g2.drawImage(img,(int)(x*Data.camSize - Data.camX),(int)(y*Data.camSize - Data.camY),
+                    (int)(width*Data.camSize),(int)(height*Data.camSize),null);
         }catch (Exception e){
 
         }
