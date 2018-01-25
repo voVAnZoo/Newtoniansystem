@@ -32,10 +32,18 @@ public class MyKeyListener implements KeyListener {
             Data.ctrl = true;
         }
         if(e.getKeyCode() == KeyEvent.VK_N && Data.ctrl){
-            Server.start();
+            if(Data.servWork){
+                Data.servWork = false;
+            }else {
+                Server.start();
+            }
         }
-        if(e.getKeyCode() == KeyEvent.VK_C && Data.ctrl){
-            Client.start(JOptionPane.showInputDialog("введите IP"));
+        if(e.getKeyCode() == KeyEvent.VK_C && Data.ctrl) {
+            if (Data.clientWork) {
+                Data.clientWork = false;
+            } else {
+                Client.start(JOptionPane.showInputDialog("введите IP"));
+            }
         }
     }
 

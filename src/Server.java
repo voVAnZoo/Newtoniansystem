@@ -16,19 +16,19 @@ public class Server {
         Thread serverThread = new Thread(new Runnable() {
             @Override
             public void run() {
+                Psub clientSub = new Psub(1,0,0,0,0,0,0,0);
                 try {
                     ServerSocket server= new ServerSocket(533);
                     Socket client = server.accept();
 
-                    Psub clientsub = new Psub(1,0,0,0,0,0,0,0);
-                    clientsub.isActiv = false;
-                    Data.gp.allsub.add(clientsub);
+                    clientSub.isActiv = false;
+                    Data.gp.allsub.add(clientSub);
 
                     DataOutputStream out = new DataOutputStream(client.getOutputStream());
                     DataInputStream in = new DataInputStream(client.getInputStream());
 
-                    while(!client.isClosed()){
-                        read(in);
+                    while(!client.isClosed()&&Data.servWork){
+                        read(in,clientSub, client);
 
                         out.writeUTF(Data.gp.allplayer.get(0).getX() + "%"
                                 + Data.gp.allplayer.get(0).getY() + "%"
@@ -43,27 +43,30 @@ public class Server {
                     server.close();
 
                     Data.servWork = false;
-
+                    Data.gp.allsub.remove(clientSub);
                 }catch (Exception e){
+                    Data.gp.allsub.remove(clientSub);
                     e.printStackTrace();
                     Data.servWork = false;
                 }
             }
 
-            public  void read(DataInputStream in){
+            public  void read(DataInputStream in, Psub clientSub, Socket client){
                 try {
                     String entry = in.readUTF();
-                    Data.gp.allsub.get(0).setX(Double.parseDouble(entry.substring(0, entry.indexOf('%'))));
-                    Data.gp.allsub.get(0).setY(Double.parseDouble(
+                    clientSub.setX(Double.parseDouble(entry.substring(0, entry.indexOf('%'))));
+                    clientSub.setY(Double.parseDouble(
                             entry.substring(entry.indexOf('%') + 1, entry.lastIndexOf('%'))));
-                    Data.gp.allsub.get(0).setPhi(Double.parseDouble(entry.substring(entry.lastIndexOf('%')+1)));
+                    clientSub.setPhi(Double.parseDouble(entry.substring(entry.lastIndexOf('%')+1)));
                     /*System.out.println(Double.parseDouble(entry.substring(0, entry.indexOf('%'))));
                     System.out.println(Double.parseDouble(
                     entry.substring(entry.indexOf('%') + 1, entry.lastIndexOf('%'))));
                     System.out.println(Double.parseDouble(entry.substring(entry.lastIndexOf('%')+1)));*/
                 }catch (Exception e){
-                    e.printStackTrace();
-                    read(in);
+                    if (!client.isClosed()&&Data.servWork) {
+                        e.printStackTrace();
+                        read(in, clientSub, client);
+                    }
                 }
             }
         });
