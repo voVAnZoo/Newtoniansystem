@@ -13,7 +13,7 @@ public class Client {
             @Override
             public void run() {
                 try {
-                    Socket socket = new Socket("localhost", 533);
+                    Socket socket = new Socket("25.82.192.177", 533);
                     System.out.println("yes");
 
                     DataOutputStream oos = new DataOutputStream(socket.getOutputStream());
