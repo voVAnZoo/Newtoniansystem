@@ -46,26 +46,24 @@ public class Server {
                     Data.gp.allsub.remove(clientSub);
                 }catch (Exception e){
                     Data.gp.allsub.remove(clientSub);
-                    e.printStackTrace();
                     Data.servWork = false;
                 }
             }
 
             public  void read(DataInputStream in, Psub clientSub, Socket client){
-                try {
-                    String entry = in.readUTF();
-                    clientSub.setX(Double.parseDouble(entry.substring(0, entry.indexOf('%'))));
-                    clientSub.setY(Double.parseDouble(
-                            entry.substring(entry.indexOf('%') + 1, entry.lastIndexOf('%'))));
-                    clientSub.setPhi(Double.parseDouble(entry.substring(entry.lastIndexOf('%')+1)));
-                    /*System.out.println(Double.parseDouble(entry.substring(0, entry.indexOf('%'))));
-                    System.out.println(Double.parseDouble(
-                    entry.substring(entry.indexOf('%') + 1, entry.lastIndexOf('%'))));
-                    System.out.println(Double.parseDouble(entry.substring(entry.lastIndexOf('%')+1)));*/
-                }catch (Exception e){
-                    if (!client.isClosed()&&Data.servWork) {
-                        e.printStackTrace();
-                        read(in, clientSub, client);
+                if (!client.isClosed()&&Data.servWork) {
+                    try {
+                        String entry = in.readUTF();
+                        clientSub.setX(Double.parseDouble(entry.substring(0, entry.indexOf('%'))));
+                        clientSub.setY(Double.parseDouble(
+                                entry.substring(entry.indexOf('%') + 1, entry.lastIndexOf('%'))));
+                        clientSub.setPhi(Double.parseDouble(entry.substring(entry.lastIndexOf('%') + 1)));
+                    } catch (Exception e) {
+                        if (!client.isClosed() && Data.servWork) {
+                            read(in, clientSub, client);
+                        } else {
+                            Data.gp.allsub.remove(clientSub);
+                        }
                     }
                 }
             }

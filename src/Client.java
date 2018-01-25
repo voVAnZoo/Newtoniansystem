@@ -54,7 +54,8 @@ public class Client {
                 }catch (Exception e){
                     if (!socket.isOutputShutdown()&&Data.clientWork) {
                         read(in, serverSub,socket);
-                        e.printStackTrace();
+                    }else {
+                        Data.gp.allsub.remove(serverSub);
                     }
                 }
             }
