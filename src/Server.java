@@ -13,15 +13,13 @@ public class Server {
 
         Data.servWork = true;
 
-        System.out.println("asd");
-
         Thread serverThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     ServerSocket server= new ServerSocket(533);
                     Socket client = server.accept();
-                    System.out.println("yes");
+
                     Psub clientsub = new Psub(1,0,0,0,0,0,0,0);
                     clientsub.isActiv = false;
                     Data.gp.allsub.add(clientsub);
@@ -35,7 +33,7 @@ public class Server {
 
                         out.writeUTF(Data.gp.allplayer.get(0).getX() + "%" + Data.gp.allplayer.get(0).getY() + "%" + Data.gp.allplayer.get(0).getPhi());
                         out.flush();
-                        System.out.println("go");
+
                     }
 
                     in.close();
@@ -45,12 +43,10 @@ public class Server {
                     server.close();
 
                     Data.servWork = false;
-                    System.out.println("stop");
 
                 }catch (Exception e){
                     e.printStackTrace();
                     Data.servWork = false;
-                    System.out.println("err");
                 }
             }
 
@@ -63,10 +59,8 @@ public class Server {
                     System.out.println(Double.parseDouble(entry.substring(0, entry.indexOf('%'))));
                     System.out.println(Double.parseDouble(entry.substring(entry.indexOf('%') + 1, entry.lastIndexOf('%'))));
                     System.out.println(Double.parseDouble(entry.substring(entry.lastIndexOf('%')+1)));
-                    System.out.println("ok");
                 }catch (Exception e){
                     e.printStackTrace();
-                    System.out.println("ещё нет");
                     read(in);
                 }
             }

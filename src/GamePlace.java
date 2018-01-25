@@ -38,7 +38,6 @@ public class GamePlace {
 
         for(int i = 0;i < allsub.size();i++){
             allsub.get(i).action();
-            System.out.println("я тута");
         }
 
         for(int i = 0;i < allplayer.size();i++){
