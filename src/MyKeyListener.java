@@ -45,6 +45,12 @@ public class MyKeyListener implements KeyListener {
                 Client.start(JOptionPane.showInputDialog("введите IP"));
             }
         }
+        if(e.getKeyCode() == KeyEvent.VK_Q){
+            Data.q = true;
+        }
+        if(e.getKeyCode() == KeyEvent.VK_E){
+            Data.e = true;
+        }
     }
 
     @Override
@@ -66,6 +72,12 @@ public class MyKeyListener implements KeyListener {
         }
         if(e.getKeyCode() == KeyEvent.VK_CONTROL){
             Data.ctrl = false;
+        }
+        if(e.getKeyCode() == KeyEvent.VK_Q){
+            Data.q = false;
+        }
+        if(e.getKeyCode() == KeyEvent.VK_E){
+            Data.e = false;
         }
     }
 }

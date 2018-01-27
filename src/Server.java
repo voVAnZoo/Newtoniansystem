@@ -16,7 +16,7 @@ public class Server {
         Thread serverThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Psub clientSub = new Psub(1,0,0,0,0,0,0,0);
+                Psub clientSub = new Psub(1,0,0,0,0,0,0,0,1);
                 try {
                     ServerSocket server= new ServerSocket(533);
                     Socket client = server.accept();

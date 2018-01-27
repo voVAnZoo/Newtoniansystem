@@ -14,8 +14,8 @@ public class Subject {
     double accelY;
     double phi;
 
-    int width = 60;
-    int height = 60;
+    int width;
+    int height;
 
     public void setM(double m) {
         this.m = m;
@@ -89,7 +89,7 @@ public class Subject {
         this.speedY = 0;
         this.accelX = 0;
         this.speedY = 0;
-        this.phi = 0;
+        this.phi = 90;
     }
 
     public Subject(double m, double x, double y, double speedX, double speedY, double accelX, double accelY, double phi){

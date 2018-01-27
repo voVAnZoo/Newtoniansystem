@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 
 /**
@@ -8,7 +9,8 @@ public class MyFrame extends JFrame {
 
     public MyFrame(String s){
         super(s);
-        setBounds(0,0, Data.sSize.width, Data.sSize.height-40);
+        Dimension sSize = Toolkit.getDefaultToolkit ().getScreenSize ();
+        setBounds(0,0, sSize.width, sSize.height-40);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         addKeyListener(new MyKeyListener());

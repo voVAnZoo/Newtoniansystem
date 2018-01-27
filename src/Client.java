@@ -11,7 +11,7 @@ public class Client {
         Thread clientThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Psub serverSub = new Psub(1,0,0,0,0,0,0,0);
+                Psub serverSub = new Psub(1,0,0,0,0,0,0,0,1);
                 try {
                     Socket socket = new Socket(s, 533);
 

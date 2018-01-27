@@ -12,6 +12,8 @@ public class Data {
     public static boolean a = false;
     public static boolean s = false;
     public static boolean d = false;
+    public static boolean q = false;
+    public static boolean e = false;
     public static boolean shift = false;
     public static boolean ctrl = false;
 
@@ -29,8 +31,8 @@ public class Data {
     public static boolean clientWork = false;
 
     public static class sSize{
-        public static int width = 1900;
-        public static int height = 1000;
+        public static int width = 19000;
+        public static int height = 10000;
     }
 
 }
