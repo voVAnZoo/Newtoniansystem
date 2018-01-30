@@ -11,7 +11,7 @@ public class Main {
     public static void init(){
 
         Data.gp = new GamePlace();
-        Psub i = new Psub(1,0,0,0,0,0.01,0.01,0, 1);
+        Psub i = new Psub(1,0,0,0,0,0.01,0.01,0, 2);
         Data.gp.add(i);
         new MyFrame("Newtonian's system simulator");
         Timer timer = new Timer(Data.friq, new MyActionListener());

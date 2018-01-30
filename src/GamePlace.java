@@ -1,5 +1,7 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.ColorModel;
+import java.awt.image.ImageFilter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,12 +19,12 @@ public class GamePlace {
         }catch (Exception e) {
 
         }
-
     }
     List<Subject> allsub = new ArrayList<Subject>();
     List<Psub> allplayer = new ArrayList<Psub>();
 
     public void draw(Graphics2D g2){
+
         g2.drawImage(img, (int)(-Data.camX), (int)(-Data.camY),
                 (int) (Data.sSize.width * Data.camSize), (int) (Data.sSize.height * Data.camSize),null);
 
