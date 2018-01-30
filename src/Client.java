@@ -11,7 +11,7 @@ public class Client {
         Thread clientThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Psub serverSub = new Psub(1,0,0,0,0,0,0,0,1);
+                Psub serverSub = new Psub(1,0,0,1);
                 try {
                     Socket socket = new Socket(s, 533);
 
@@ -24,8 +24,8 @@ public class Client {
 
                     while(!socket.isOutputShutdown()&&Data.clientWork){
                         oos.writeUTF(Data.gp.allplayer.get(0).getX() + "%"
-                                + Data.gp.allplayer.get(0).getY() + "%"
-                                + Data.gp.allplayer.get(0).getPhi());
+                                + Data.gp.allplayer.get(0).getY() + "%");
+                                //+ Data.gp.allplayer.get(0).getPhi());
                         oos.flush();
 
                         read(ois,serverSub,socket);
@@ -49,7 +49,7 @@ public class Client {
                     serverSub.setX(Double.parseDouble(entry.substring(0, entry.indexOf('%'))));
                     serverSub.setY(Double.parseDouble(
                             entry.substring(entry.indexOf('%') + 1, entry.lastIndexOf('%'))));
-                    serverSub.setPhi(Double.parseDouble(entry.substring(entry.lastIndexOf('%')+1)));
+                    //serverSub.setPhi(Double.parseDouble(entry.substring(entry.lastIndexOf('%')+1)));
 
                 }catch (Exception e){
                     if (!socket.isOutputShutdown()&&Data.clientWork) {

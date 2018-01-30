@@ -9,48 +9,55 @@ import java.util.ArrayList;
  */
 public class Psub extends Subject {
 
-    public boolean isActiv;
+    public boolean isActiv = false;
     public int type = 0;
     public double accel = 0.01;
     public double accelRotation = 0;
     public double speedRotation;
+    double speedX;
+    double speedY;
+    double accelX;
+    double accelY;
+    double phi;
 
     /*
     * 1 - Истребитель
     * 2 - Крейсер
     * 3 - Линкор
     * */
+
     java.util.List<Image> img = new ArrayList<Image>();
 
-
-    public Psub(double m, double x, double y, double speedX, double speedY, double accelX, double accelY, double phi, int type) {
-        super(m, x, y, speedX, speedY, accelX, accelY, phi);
+    public Psub(double m, double x, double y, int type) {
+        super(m, x, y);
         this.type = type;
-        String s1 = "";
+
         switch (type) {
             case 1:
-                s1 = "fighter/";
+                init("fighter");
                 speedRotation = 0.5;
                 break;
             case 2:
-                s1 = "cruiser/";
+                init("cruiser");
                 speedRotation = 0;
                 break;
             case 3:
-                s1 = "cruiser/";
-                //s1 = "battleship/";
+                init("battleship");
+                break;
+            default:
+                this.type = 1;
+                init("fighter");
                 break;
         }
+    }
 
-        isActiv = true;
+    public void init(String s1){
         try {
-            img.add(ImageIO.read(new File(s1 + "sh0.png")));
-            img.add(ImageIO.read(new File(s1 + "sh1.png")));
-            img.add(ImageIO.read(new File(s1 + "sh2.png")));
-            img.add(ImageIO.read(new File(s1 + "sh3.png")));
-            img.add(ImageIO.read(new File(s1 + "sh4.png")));
-        } catch (Exception e) {
-        }
+            File s[] = new File(s1 + "/").listFiles();
+            for(int i = 0;i < s.length;i++){
+                img.add(ImageIO.read(s[i]));
+            }
+        } catch (Exception e) {}
 
         width = img.get(0).getWidth(null);
         height = img.get(0).getHeight(null);
@@ -59,31 +66,23 @@ public class Psub extends Subject {
     public Psub(double m, int type) {
         super(m);
         this.type = type;
-        String s1 = "";
         switch (type) {
             case 1:
-                s1 = "fighter/";
+                init("fighter");
                 speedRotation = 0.5;
                 break;
             case 2:
-                s1 = "cruiser/";
+                init("cruiser");
                 speedRotation = 0;
                 break;
             case 3:
-                s1 = "cruiser/";
-                //s1 = "battleship/";
+                init("battleship");
+                break;
+            default:
+                this.type = 1;
+                init("fighter");
                 break;
         }
-        isActiv = true;
-        try {
-            img.add(ImageIO.read(new File(s1 + "sh0.png")));
-            img.add(ImageIO.read(new File(s1 + "sh1.png")));
-            img.add(ImageIO.read(new File(s1 + "sh2.png")));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        width = img.get(0).getWidth(null);
-        height = img.get(0).getHeight(null);
     }
 
     @Override

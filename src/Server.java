@@ -16,7 +16,7 @@ public class Server {
         Thread serverThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Psub clientSub = new Psub(1,0,0,0,0,0,0,0,1);
+                Psub clientSub = new Psub(1,0,0,1);
                 try {
                     ServerSocket server= new ServerSocket(533);
                     Socket client = server.accept();
@@ -30,9 +30,9 @@ public class Server {
                     while(!client.isClosed()&&Data.servWork){
                         read(in,clientSub, client);
 
-                        out.writeUTF(Data.gp.allplayer.get(0).getX() + "%"
+                        /*out.writeUTF(Data.gp.allplayer.get(0).getX() + "%"
                                 + Data.gp.allplayer.get(0).getY() + "%"
-                                + Data.gp.allplayer.get(0).getPhi());
+                                + Data.gp.allplayer.get(0).phi());*/
                         out.flush();
                     }
 
@@ -57,7 +57,7 @@ public class Server {
                         clientSub.setX(Double.parseDouble(entry.substring(0, entry.indexOf('%'))));
                         clientSub.setY(Double.parseDouble(
                                 entry.substring(entry.indexOf('%') + 1, entry.lastIndexOf('%'))));
-                        clientSub.setPhi(Double.parseDouble(entry.substring(entry.lastIndexOf('%') + 1)));
+                        //clientSub.setPhi(Double.parseDouble(entry.substring(entry.lastIndexOf('%') + 1)));
                     } catch (Exception e) {
                         if (!client.isClosed() && Data.servWork) {
                             read(in, clientSub, client);

@@ -5,16 +5,20 @@ import javax.swing.*;
  */
 public class Main {
     public static void main(String[] args) {
-        init();
+        try {
+            init(Integer.parseInt(args[0]));
+        }catch (Exception e){
+            init(1);
+        }
     }
 
-    public static void init(){
-
+    public static void init(int t){
         Data.gp = new GamePlace();
-        Psub i = new Psub(1,0,0,0,0,0.01,0.01,0, 2);
+        Psub i = new Psub(1,0,0, t);
+        i.isActiv = true;
         Data.gp.add(i);
-        new MyFrame("Newtonian's system simulator");
-        Timer timer = new Timer(Data.friq, new MyActionListener());
-        timer.start();
+        Data.jf = new MyFrame("Newtonian's system simulator");
+        Data.timer = new Timer(Data.friq, new MyActionListener());
+        Data.timer.start();
     }
 }

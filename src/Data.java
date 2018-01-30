@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -18,6 +19,8 @@ public class Data {
     public static boolean ctrl = false;
 
     public static GamePlace gp = null;
+    public static JFrame jf = null;
+    public static Timer timer = null;
 
 
     public static double camFactor = 1.2;

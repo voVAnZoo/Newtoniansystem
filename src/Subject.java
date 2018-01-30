@@ -8,10 +8,6 @@ public class Subject {
     double m;
     double x;
     double y;
-    double speedX;
-    double speedY;
-    double accelX;
-    double accelY;
     double phi;
 
     int width;
@@ -29,25 +25,6 @@ public class Subject {
         this.y = y;
     }
 
-    public void setSpeedX(double speedX) {
-        this.speedX = speedX;
-    }
-
-    public void setSpeedY(double speedY) {
-        this.speedY = speedY;
-    }
-
-    public void setAccelX(double accelX) {
-        this.accelX = accelX;
-    }
-
-    public void setAccelY(double accelY) {
-        this.accelY = accelY;
-    }
-
-    public void setPhi(double phi) {
-        this.phi = phi;
-    }
 
     public double getM() {
         return m;
@@ -61,46 +38,17 @@ public class Subject {
         return y;
     }
 
-    public double getSpeedX() {
-        return speedX;
-    }
-
-    public double getSpeedY() {
-        return speedY;
-    }
-
-    public double getAccelX() {
-        return accelX;
-    }
-
-    public double getAccelY() {
-        return accelY;
-    }
-
-    public double getPhi() {
-        return phi;
-    }
 
     public Subject(double m){
         this.m = m;
         this.x = 0;
         this.y = 0;
-        this.speedX = 0;
-        this.speedY = 0;
-        this.accelX = 0;
-        this.speedY = 0;
-        this.phi = 90;
     }
 
-    public Subject(double m, double x, double y, double speedX, double speedY, double accelX, double accelY, double phi){
+    public Subject(double m, double x, double y){
         this.m = m;
         this.x = x;
         this.y = y;
-        this.speedX = speedX;
-        this.speedY = speedY;
-        this.accelX = accelX;
-        this.accelY = accelY;
-        this.phi = phi;
     }
 
     public void draw(Graphics2D g2){
