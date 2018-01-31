@@ -3,22 +3,29 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by Vova on 22.01.2018.
  */
 public class Psub extends Subject {
 
-    public boolean isActiv = false;
-    public int type = 0;
-    public double accel = 0.01;
-    public double accelRotation = 0;
-    public double speedRotation;
+    boolean isActiv = false;
+    int type = 0;
+    double accel;
+    double accelRotation;
+    double speedRotation;
     double speedX;
     double speedY;
-    double accelX;
-    double accelY;
-    double phi;
+    double muRotation;
+    double mu;
+    double backAccel;
+    double nitro;
+    double minSpeedRotation;
+    double shoot;
+    double minAccel;
+    double maxAccel;
+    double sideAccel;
 
     /*
     * 1 - Истребитель
@@ -35,11 +42,9 @@ public class Psub extends Subject {
         switch (type) {
             case 1:
                 init("fighter");
-                speedRotation = 0.5;
                 break;
             case 2:
                 init("cruiser");
-                speedRotation = 0;
                 break;
             case 3:
                 init("battleship");
@@ -49,18 +54,6 @@ public class Psub extends Subject {
                 init("fighter");
                 break;
         }
-    }
-
-    public void init(String s1){
-        try {
-            File s[] = new File(s1 + "/").listFiles();
-            for(int i = 0;i < s.length;i++){
-                img.add(ImageIO.read(s[i]));
-            }
-        } catch (Exception e) {}
-
-        width = img.get(0).getWidth(null);
-        height = img.get(0).getHeight(null);
     }
 
     public Psub(double m, int type) {
@@ -131,16 +124,16 @@ public class Psub extends Subject {
             speedX += accel * Math.sin(Math.toRadians(this.phi));
         }
         if (Data.s) {
-            speedY += accel * 0.99 * Math.cos(Math.toRadians(this.phi));
-            speedX -= accel * 0.99 * Math.sin(Math.toRadians(this.phi));
+            speedY += accel * backAccel * Math.cos(Math.toRadians(this.phi));
+            speedX -= accel * backAccel * Math.sin(Math.toRadians(this.phi));
         }
         if (Data.q) {
-            speedY -= 4 * accel * Math.cos(Math.toRadians(this.phi));
-            speedX += 4 * accel * Math.sin(Math.toRadians(this.phi));
+            speedY -= nitro * accel * Math.cos(Math.toRadians(this.phi));
+            speedX += nitro * accel * Math.sin(Math.toRadians(this.phi));
         }
         if (Data.e) {
-            speedY += 4 * accel * Math.cos(Math.toRadians(this.phi));
-            speedX -= 4 * accel * Math.sin(Math.toRadians(this.phi));
+            speedY += nitro * accel * Math.cos(Math.toRadians(this.phi));
+            speedX -= nitro * accel * Math.sin(Math.toRadians(this.phi));
         }
 
         x = (x + speedX - width + Data.sSize.width) % (Data.sSize.width - width);
@@ -148,71 +141,54 @@ public class Psub extends Subject {
     }
 
     public void actionCruiser() {
-        if (Data.d) {
-            if (accelRotation == -0.001) {
-                accelRotation = 0;
-            } else {
-                accelRotation = 0.001;
-            }
-        } else {
-            if (accelRotation != -0.001) {
-                accelRotation = 0;
-            }
-        }
 
-        if (Data.a) {
-            if (accelRotation == 0.001) {
-                accelRotation = 0;
-            } else {
-                accelRotation = -0.001;
+        if(!Data.a){
+            if(!Data.d){
+                speedRotation -= Math.signum(speedRotation) * Math.pow(speedRotation, 2) * muRotation;
+            }else {
+                speedRotation += (accelRotation - Math.signum(speedRotation) * Math.pow(speedRotation, 2) * muRotation);
             }
-        } else {
-            if (accelRotation != 0.001) {
-                accelRotation = 0;
+        }else {
+            if(!Data.d){
+                speedRotation += (- accelRotation - Math.signum(speedRotation) * Math.pow(speedRotation, 2) * muRotation);
+            }else {
+                speedRotation -= Math.signum(speedRotation) * Math.pow(speedRotation, 2) * muRotation;
             }
         }
 
         if (Data.w) {
-            if (Data.shift) {
-                if (accel + 0.005 > 0.1) {
-                    accel = 0.1;
-                } else {
-                    accel += 0.005;
-                }
+            if (accel + shoot > maxAccel) {
+                accel = maxAccel;
             } else {
-                speedY -= accel * Math.cos(Math.toRadians(this.phi));
-                speedX += accel * Math.sin(Math.toRadians(this.phi));
+                accel += shoot;
             }
         }
 
         if (Data.s) {
-            if (Data.shift) {
-                if (accel - 0.005 < 0) {
-                    accel = 0;
-                } else {
-                    accel -= 0.005;
-                }
+            if (accel - shoot < minAccel) {
+                accel = minAccel;
             } else {
-                speedY += accel * 0.99 * Math.cos(Math.toRadians(this.phi));
-                speedX -= accel * 0.99 * Math.sin(Math.toRadians(this.phi));
+                accel -= shoot;
             }
         }
 
-        if (Data.q) {
-            y -= 0.5 * Math.sin(Math.toRadians(this.phi));
-            x -= 0.5 * Math.cos(Math.toRadians(this.phi));
+        /*if (Data.q) {
+            speedY -= sideAccel * Math.sin(Math.toRadians(this.phi));
+            speedX -= sideAccel * Math.cos(Math.toRadians(this.phi));
         }
 
         if (Data.e) {
-            y += 0.5 * Math.sin(Math.toRadians(this.phi));
-            x += 0.5 * Math.cos(Math.toRadians(this.phi));
-        }
+            speedY += sideAccel * Math.sin(Math.toRadians(this.phi));
+            speedX += sideAccel * Math.cos(Math.toRadians(this.phi));
+        }*/
+
+        speedY -= accel * Math.cos(Math.toRadians(this.phi)) - Math.signum(speedY) * (Math.pow(speedX,2) + Math.pow(speedY,2)) * mu * Math.cos(Math.toRadians(this.phi));
+        speedX += accel * Math.sin(Math.toRadians(this.phi)) - Math.signum(speedX) * (Math.pow(speedX,2) + Math.pow(speedY,2)) * mu * Math.sin(Math.toRadians(this.phi));
 
         x = (x + speedX - width + Data.sSize.width) % (Data.sSize.width - width);
         y = (y + speedY - height + Data.sSize.height) % (Data.sSize.height - height);
-        speedRotation += (accelRotation - Math.signum(speedRotation) * (speedRotation * speedRotation) * 0.005);
 
-        if (Math.abs(speedRotation) > 0.008) {
+        if (Math.abs(speedRotation) > minSpeedRotation) {
             phi = (phi + speedRotation + 360) % 360;
         }
     }
@@ -295,37 +271,62 @@ public class Psub extends Subject {
                     (int) (y * Data.camSize - Data.camY) + 2 * (int) (height * Data.camSize) / 3);
             g2.setTransform(affine);
 
-            if (Data.w) {
-                /*double alpha = 0.5;
+            g2.drawImage(img.get(0),
+                    (int) (x * Data.camSize - Data.camX),
+                    (int) (y * Data.camSize - Data.camY),
+                    (int) (width * Data.camSize),
+                    (int) (height * Data.camSize),
+                    null);
+
+            /*double alpha = 0.5;
                 AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) alpha);
                 g2.setComposite(ac);*/
+
+            if (Data.w) {
+                g2.drawImage(img.get(1),
+                        (int) (x * Data.camSize - Data.camX),
+                        (int) (y * Data.camSize - Data.camY),
+                        (int) (img.get(1).getWidth(null) * Data.camSize),
+                        (int) (img.get(1).getHeight(null) * Data.camSize),
+                        null);
+            }
+
+            if(Data.a){
                 g2.drawImage(img.get(2),
                         (int) (x * Data.camSize - Data.camX),
                         (int) (y * Data.camSize - Data.camY),
-                        (int) (width * Data.camSize),
-                        (int) (height * Data.camSize),
+                        (int) (img.get(2).getWidth(null) * Data.camSize),
+                        (int) (img.get(2).getHeight(null) * Data.camSize),
                         null);
-            } else {
-                if (Data.a || Data.s || Data.d) {
-
-                    g2.drawImage(img.get(1),
-                            (int) (x * Data.camSize - Data.camX),
-                            (int) (y * Data.camSize - Data.camY),
-                            (int) (width * Data.camSize),
-                            (int) (height * Data.camSize),
-                            null);
-                } else {
-
-                    g2.drawImage(img.get(0),
-                            (int) (x * Data.camSize - Data.camX),
-                            (int) (y * Data.camSize - Data.camY),
-                            (int) (width * Data.camSize),
-                            (int) (height * Data.camSize),
-                            null);
-                }
             }
-        } catch (Exception e) {
-        }
+
+            if(Data.d){
+                g2.drawImage(img.get(3),
+                        (int) (x * Data.camSize - Data.camX),
+                        (int) (y * Data.camSize - Data.camY),
+                        (int) (img.get(3).getWidth(null) * Data.camSize),
+                        (int) (img.get(3).getHeight(null) * Data.camSize),
+                        null);
+            }
+
+            if(Data.s){
+                g2.drawImage(img.get(3),
+                        (int) (x * Data.camSize - Data.camX),
+                        (int) (y * Data.camSize - Data.camY),
+                        (int) (img.get(3).getWidth(null) * Data.camSize),
+                        (int) (img.get(3).getHeight(null) * Data.camSize),
+                        null);
+
+                g2.drawImage(img.get(2),
+                        (int) (x * Data.camSize - Data.camX),
+                        (int) (y * Data.camSize - Data.camY),
+                        (int) (img.get(2).getWidth(null) * Data.camSize),
+                        (int) (img.get(2).getHeight(null) * Data.camSize),
+                        null);
+            }
+
+        } catch (Exception e) {}
+
         //g2.fillRect((int)(x*Data.camSize - Data.camX),(int)(y*Data.camSize - Data.camY),(int)(20*Data.camSize),(int)(20*Data.camSize));
     }
 
@@ -377,6 +378,22 @@ public class Psub extends Subject {
                         (int) (img.get(2).getHeight(null) * Data.camSize),
                         null);
             }
+            if(Data.q){
+                g2.drawImage(img.get(6),
+                        (int) (x * Data.camSize - Data.camX),
+                        (int) (y * Data.camSize - Data.camY),
+                        (int) (img.get(6).getWidth(null) * Data.camSize),
+                        (int) (img.get(6).getHeight(null) * Data.camSize),
+                        null);
+            }
+            if(Data.e){
+                g2.drawImage(img.get(5),
+                        (int) (x * Data.camSize - Data.camX),
+                        (int) (y * Data.camSize - Data.camY),
+                        (int) (img.get(5).getWidth(null) * Data.camSize),
+                        (int) (img.get(5).getHeight(null) * Data.camSize),
+                        null);
+            }
 
         } catch (Exception e) {
         }
@@ -419,5 +436,69 @@ public class Psub extends Subject {
         }
     }
 
+    public void init(String s1){
+        try {
+            File s[] = new File(s1 + "/").listFiles();
+            for (File value : s) {
+                img.add(ImageIO.read(value));
+            }
+        } catch (Exception e) {}
+
+        width = img.get(0).getWidth(null);
+        height = img.get(0).getHeight(null);
+
+        config(s1);
+    }
+
+    public void config(String s1){
+        try {
+            Scanner cfgIn = new Scanner(new File(s1 + ".txt"));
+            String s ;
+
+            s = cfgIn.nextLine();
+            accel = Double.parseDouble(s.substring(0,s.indexOf('/')));
+
+            s = cfgIn.nextLine();
+            accelRotation = Double.parseDouble(s.substring(0,s.indexOf('/')));
+
+            s = cfgIn.nextLine();
+            speedRotation = Double.parseDouble(s.substring(0,s.indexOf('/')));
+
+            s = cfgIn.nextLine();
+            speedX = Double.parseDouble(s.substring(0,s.indexOf('/')));
+
+            s = cfgIn.nextLine();
+            speedY = Double.parseDouble(s.substring(0,s.indexOf('/')));
+
+            s = cfgIn.nextLine();
+            muRotation = Double.parseDouble(s.substring(0,s.indexOf('/')));
+
+            s = cfgIn.nextLine();
+            mu = Double.parseDouble(s.substring(0,s.indexOf('/')));
+
+            s = cfgIn.nextLine();
+            backAccel = Double.parseDouble(s.substring(0,s.indexOf('/')));
+
+            s = cfgIn.nextLine();
+            nitro = Double.parseDouble(s.substring(0,s.indexOf('/')));
+
+            s = cfgIn.nextLine();
+            minSpeedRotation = Double.parseDouble(s.substring(0,s.indexOf('/')));
+
+            s = cfgIn.nextLine();
+            shoot = Double.parseDouble(s.substring(0,s.indexOf('/')));
+
+            s = cfgIn.nextLine();
+            minAccel = Double.parseDouble(s.substring(0,s.indexOf('/')));
+
+            s = cfgIn.nextLine();
+            maxAccel = Double.parseDouble(s.substring(0,s.indexOf('/')));
+
+            s = cfgIn.nextLine();
+            sideAccel = Double.parseDouble(s.substring(0,s.indexOf('/')));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 }

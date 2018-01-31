@@ -25,7 +25,6 @@ public class Subject {
         this.y = y;
     }
 
-
     public double getM() {
         return m;
     }
@@ -38,17 +37,18 @@ public class Subject {
         return y;
     }
 
-
     public Subject(double m){
         this.m = m;
         this.x = 0;
         this.y = 0;
+        phi = 0;
     }
 
     public Subject(double m, double x, double y){
         this.m = m;
         this.x = x;
         this.y = y;
+        phi = 0;
     }
 
     public void draw(Graphics2D g2){
