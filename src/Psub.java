@@ -172,7 +172,7 @@ public class Psub extends Subject {
             }
         }
 
-        /*if (Data.q) {
+        if (Data.q) {
             speedY -= sideAccel * Math.sin(Math.toRadians(this.phi));
             speedX -= sideAccel * Math.cos(Math.toRadians(this.phi));
         }
@@ -180,10 +180,16 @@ public class Psub extends Subject {
         if (Data.e) {
             speedY += sideAccel * Math.sin(Math.toRadians(this.phi));
             speedX += sideAccel * Math.cos(Math.toRadians(this.phi));
-        }*/
+        }
 
-        speedY -= accel * Math.cos(Math.toRadians(this.phi)) - Math.signum(speedY) * (Math.pow(speedX,2) + Math.pow(speedY,2)) * mu * Math.cos(Math.toRadians(this.phi));
+        /*speedY -= accel * Math.cos(Math.toRadians(this.phi)) - Math.signum(speedY) * (Math.pow(speedX,2) + Math.pow(speedY,2)) * mu * Math.cos(Math.toRadians(this.phi));
         speedX += accel * Math.sin(Math.toRadians(this.phi)) - Math.signum(speedX) * (Math.pow(speedX,2) + Math.pow(speedY,2)) * mu * Math.sin(Math.toRadians(this.phi));
+*/
+        speedX -= mu * speedX * Math.sqrt(Math.pow(speedY,2) + Math.pow(speedX,2));
+        speedY -= mu * speedY * Math.sqrt(Math.pow(speedY,2) + Math.pow(speedX,2));
+
+        speedX += accel * Math.sin(Math.toRadians(this.phi));
+        speedY -= accel * Math.cos(Math.toRadians(this.phi));
 
         x = (x + speedX - width + Data.sSize.width) % (Data.sSize.width - width);
         y = (y + speedY - height + Data.sSize.height) % (Data.sSize.height - height);
@@ -282,7 +288,7 @@ public class Psub extends Subject {
                 AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) alpha);
                 g2.setComposite(ac);*/
 
-            if (Data.w) {
+            if (Data.w||Data.q) {
                 g2.drawImage(img.get(1),
                         (int) (x * Data.camSize - Data.camX),
                         (int) (y * Data.camSize - Data.camY),
@@ -309,7 +315,7 @@ public class Psub extends Subject {
                         null);
             }
 
-            if(Data.s){
+            if(Data.s||Data.e){
                 g2.drawImage(img.get(3),
                         (int) (x * Data.camSize - Data.camX),
                         (int) (y * Data.camSize - Data.camY),
@@ -324,6 +330,7 @@ public class Psub extends Subject {
                         (int) (img.get(2).getHeight(null) * Data.camSize),
                         null);
             }
+
 
         } catch (Exception e) {}
 
@@ -346,14 +353,38 @@ public class Psub extends Subject {
                     (int) (height * Data.camSize),
                     null);
 
-            if (Data.w) {
+            if(accel > 0){
+                AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) (accel/maxAccel));
+                g2.setComposite(ac);
                 g2.drawImage(img.get(1),
                         (int) (x * Data.camSize - Data.camX),
                         (int) (y * Data.camSize - Data.camY),
                         (int) (img.get(1).getWidth(null) * Data.camSize),
                         (int) (img.get(1).getHeight(null) * Data.camSize),
                         null);
+
+            }else{
+                AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) (accel/minAccel));
+                g2.setComposite(ac);
+                g2.drawImage(img.get(4),
+                        (int) (x * Data.camSize - Data.camX),
+                        (int) (y * Data.camSize - Data.camY),
+                        (int) (img.get(4).getWidth(null) * Data.camSize),
+                        (int) (img.get(4).getHeight(null) * Data.camSize),
+                        null);
+
             }
+            AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1);
+            g2.setComposite(ac);
+
+            /*if (Data.w) {
+                g2.drawImage(img.get(1),
+                        (int) (x * Data.camSize - Data.camX),
+                        (int) (y * Data.camSize - Data.camY),
+                        (int) (img.get(1).getWidth(null) * Data.camSize),
+                        (int) (img.get(1).getHeight(null) * Data.camSize),
+                        null);
+            }*/
             if(Data.a){
                 g2.drawImage(img.get(3),
                         (int) (x * Data.camSize - Data.camX),
@@ -362,14 +393,14 @@ public class Psub extends Subject {
                         (int) (img.get(3).getHeight(null) * Data.camSize),
                         null);
             }
-            if(Data.s){
+            /*if(Data.s){
                 g2.drawImage(img.get(4),
                         (int) (x * Data.camSize - Data.camX),
                         (int) (y * Data.camSize - Data.camY),
                         (int) (img.get(4).getWidth(null) * Data.camSize),
                         (int) (img.get(4).getHeight(null) * Data.camSize),
                         null);
-            }
+            }*/
             if(Data.d){
                 g2.drawImage(img.get(2),
                         (int) (x * Data.camSize - Data.camX),
