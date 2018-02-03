@@ -136,6 +136,9 @@ public class Psub extends Subject {
             speedX -= nitro * accel * Math.sin(Math.toRadians(this.phi));
         }
 
+        speedX -= mu * speedX * Math.sqrt(Math.pow(speedY,2) + Math.pow(speedX,2));
+        speedY -= mu * speedY * Math.sqrt(Math.pow(speedY,2) + Math.pow(speedX,2));
+
         x = (x + speedX - width + Data.sSize.width) % (Data.sSize.width - width);
         y = (y + speedY - height + Data.sSize.height) % (Data.sSize.height - height);
     }
