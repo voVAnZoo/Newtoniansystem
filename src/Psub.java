@@ -483,7 +483,7 @@ public class Psub extends Subject {
 
     public void config(String s1){
         try {
-            Scanner cfgIn = new Scanner(new File(s1 + ".txt"));
+            Scanner cfgIn = new Scanner(new File("cfg/" + s1 + ".txt"));
             String s ;
 
             s = cfgIn.nextLine();
