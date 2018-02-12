@@ -15,7 +15,7 @@ public class GamePlace {
     Image img;
     public GamePlace(){
         try {
-            img = ImageIO.read(new File("maxresdefault.jpg"));
+            img = ImageIO.read(new File("maxresdefault.png"));
         }catch (Exception e) {
 
         }
