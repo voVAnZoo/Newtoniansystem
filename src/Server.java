@@ -19,7 +19,6 @@ public class Server {
 
     public static void start(){
 
-
         Data.servWork = true;
 
         Thread serverThread = new Thread(new Runnable() {

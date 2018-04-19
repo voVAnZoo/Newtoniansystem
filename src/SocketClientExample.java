@@ -25,14 +25,18 @@ public class SocketClientExample {
             client.write(buffer);
             System.out.println(messages [i]);
             buffer.clear();
-            //Thread.sleep(5000);
+            System.out.println("here");
+            Thread.sleep(5000);
+            System.out.println("agein");
             ByteBuffer bufferr = ByteBuffer.allocate(1024);
             int numRead = -1;
             numRead = client.read(bufferr);
+            System.out.println("for you");
 
             byte[] data = new byte[numRead];
             System.arraycopy(bufferr.array(), 0, data, 0, numRead);
             System.err.println("good: " + new String(data));
+            System.out.println("so good");
         }
         client.close();
     }

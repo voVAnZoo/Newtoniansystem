@@ -112,12 +112,12 @@ public class SocketServerExample {
         numRead = channel.read(buffer);
 
 
-        String [] messages = new String []
-                {"addasd","asdss"};
-
-        byte [] message = new String("adsadssssd").getBytes();
-        ByteBuffer bufferf = ByteBuffer.wrap(message);
-        channel.write(bufferf);
+//        String [] messages = new String []
+//                {"addasd","asdss"};
+//
+//        byte [] message = new String("adsadssssd").getBytes();
+//        ByteBuffer bufferf = ByteBuffer.wrap(message);
+//        channel.write(bufferf);
 
         if (numRead == -1) {
             this.dataMapper.remove(channel);
