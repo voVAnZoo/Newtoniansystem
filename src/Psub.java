@@ -535,4 +535,8 @@ public class Psub extends Subject {
         }
     }
 
+    public void intefrace(){
+
+    }
+
 }

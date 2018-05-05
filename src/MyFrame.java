@@ -16,12 +16,12 @@ public class MyFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         addKeyListener(new MyKeyListener());
-        //addMouseListener(new MyMouseListener());
-        //addMouseWheelListener(new MyMouseWheelListener());
-        //addMouseMotionListener(new MyMouseMotionListener());
+        addMouseListener(new MyMouseListener());
+        addMouseWheelListener(new MyMouseWheelListener());
+        addMouseMotionListener(new MyMouseMotionListener());
 
         Grafonium a = new Grafonium();
-        a.addMouseListener(new MouseListener() {
+        /*a.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 System.out.println(e.getX() + " " + e.getY());
@@ -46,7 +46,7 @@ public class MyFrame extends JFrame {
             public void mouseExited(MouseEvent e) {
 
             }
-        });
+        });*/
         add(a);
         setVisible(true);
     }
