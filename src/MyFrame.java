@@ -21,32 +21,6 @@ public class MyFrame extends JFrame {
         addMouseMotionListener(new MyMouseMotionListener());
 
         Grafonium a = new Grafonium();
-        /*a.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.out.println(e.getX() + " " + e.getY());
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });*/
         add(a);
         setVisible(true);
     }
