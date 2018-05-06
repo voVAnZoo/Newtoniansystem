@@ -26,6 +26,7 @@ public class Psub extends Subject {
     double minAccel;
     double maxAccel;
     double sideAccel;
+    AlphaComposite ac;
 
     /*
     * 1 - Истребитель
@@ -357,7 +358,7 @@ public class Psub extends Subject {
                     null);
 
             if(accel > 0){
-                AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) (accel/maxAccel));
+                ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) (accel/maxAccel));
                 g2.setComposite(ac);
                 g2.drawImage(img.get(1),
                         (int) (x * Data.camSize - Data.camX),
@@ -367,7 +368,7 @@ public class Psub extends Subject {
                         null);
 
             }else{
-                AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) (accel/minAccel));
+                ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) (accel/minAccel));
                 g2.setComposite(ac);
                 g2.drawImage(img.get(4),
                         (int) (x * Data.camSize - Data.camX),
@@ -377,7 +378,7 @@ public class Psub extends Subject {
                         null);
 
             }
-            AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1);
+            ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1);
             g2.setComposite(ac);
 
             /*if (Data.w) {

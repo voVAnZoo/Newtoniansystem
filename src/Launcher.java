@@ -24,6 +24,8 @@ public class Launcher extends JFrame{
     int mausX;
     int mausY;
     double k,l;
+    double t1 = 0;
+    AlphaComposite ac;
 
     public static void main(String[] args) {
         Launcher a = new Launcher("sdf");
@@ -136,10 +138,14 @@ public class Launcher extends JFrame{
 
         k = (double)(getWidth()-16) / (double)(im1.getWidth(null)) ;
         l = (double)(getHeight()-48) / (double)(im1.getHeight(null)) ;
-
         g2.drawImage(im1,0,0,(int)(im1.getWidth(null)*k),(int)(im2.getHeight(null)*l),null);
+
+        ac =  AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float)(Math.sin((System.nanoTime() - t1)/2140000000) + 2)/3);
+        g2.setComposite(ac);
         g2.drawImage(im2,0,0,(int)(im2.getWidth(null)*k),(int)(im2.getHeight(null)*l),null);
         g2.drawImage(im3,0,0,(int)(im3.getWidth(null)*k),(int)(im3.getHeight(null)*l),null);
+        ac =  AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1);
+        g2.setComposite(ac);
         g2.drawImage(im4,0,0,(int)(im4.getWidth(null)*k),(int)(im2.getHeight(null)*l),null);
         g2.drawImage(im6,0,0,(int)(im6.getWidth(null)*k),(int)(im6.getHeight(null)*l),null);
 
@@ -266,6 +272,7 @@ public class Launcher extends JFrame{
                     }else {
                         text.setVisible(false);
                         scen = 1;
+                        t1 = System.nanoTime();
                     }
                 }
                 break;
