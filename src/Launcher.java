@@ -1,3 +1,5 @@
+import com.sun.javaws.*;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -94,9 +96,9 @@ public class Launcher extends JFrame {
         l.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON1) {
-                    click();
-                }
+//                if (e.getButton() == MouseEvent.BUTTON1) {
+//                    click();
+//                }
             }
 
             @Override
@@ -283,6 +285,28 @@ public class Launcher extends JFrame {
                     scen = 2;
                 }
                 break;
+            case 2:
+                if ((mausY >= im1.getHeight(null) * f / 5) &&
+                        (mausY <= im1.getHeight(null) * f * 2 / 5) &&
+                        (mausX <= im1.getWidth(null) * k / 2) &&
+                        (mausX >= im1.getWidth(null) * k / 10)) {
+                    Main.init(1);
+                }
+                if ((mausY >= im1.getHeight(null) * f * 2 / 5) &&
+                        (mausY <= im1.getHeight(null) * f * 3 / 5) &&
+                        (mausX <= im1.getWidth(null) * k / 2) &&
+                        (mausX >= im1.getWidth(null) * k / 10)){
+                    Main.init(2);
+                }
+                if ((mausY >= im1.getHeight(null) * f * 3 / 5) &&
+                        (mausY <= im1.getHeight(null) * f * 4 / 5) &&
+                        (mausX <= im1.getWidth(null) * k / 2) &&
+                        (mausX >= im1.getWidth(null) * k / 10)) {
+                    Main.init(3);
+                }
+                setVisible(false);
+                break;
+
         }
     }
 }
