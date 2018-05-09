@@ -284,6 +284,19 @@ public class Launcher extends JFrame {
                         (mausX >= im1.getWidth(null) * k / 10)) {
                     scen = 2;
                 }
+                if ((mausY >= im1.getHeight(null) * f * 2 / 5) &&
+                        (mausY <= im1.getHeight(null) * f * 3 / 5) &&
+                        (mausX <= im1.getWidth(null) * k / 2) &&
+                        (mausX >= im1.getWidth(null) * k / 10)){
+                    JOptionPane.showMessageDialog(null,"Сервер не найден");
+                }
+                if ((mausY >= im1.getHeight(null) * f * 3 / 5) &&
+                        (mausY <= im1.getHeight(null) * f * 4 / 5) &&
+                        (mausX <= im1.getWidth(null) * k / 2) &&
+                        (mausX >= im1.getWidth(null) * k / 10)) {
+
+                }
+
                 break;
             case 2:
                 if ((mausY >= im1.getHeight(null) * f / 5) &&
