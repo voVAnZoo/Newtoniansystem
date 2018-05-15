@@ -26,6 +26,9 @@ public class Launcher extends JFrame {
     static Image im11;
     static Image im12;
     static Image im13;
+    static Image im14;
+    static Image im15;
+    static Image im16;
     JTextField text = new JTextField();
     int scen;
     int mausX;
@@ -133,19 +136,22 @@ public class Launcher extends JFrame {
 
     public static void init() {
         try {
-            im1 = ImageIO.read(new File("stars.png")); // задний фон
-            im2 = ImageIO.read(new File("star_1.png")); // кусок звезды
-            im3 = ImageIO.read(new File("star_2.png")); // это тоже кусок звезды
-            im4 = ImageIO.read(new File("star_3.png")); // ещё кусок звезды
-            im5 = ImageIO.read(new File("menu_button.png")); // кнопка
-            im6 = ImageIO.read(new File("menu_all_buttons.png")); // кнопки
-            im7 = ImageIO.read(new File("choice1.png")); // кнопки
-            im8 = ImageIO.read(new File("choice2.png")); // кнопки
-            im9 = ImageIO.read(new File("choice3.png")); // кнопки
-            im10 = ImageIO.read(new File("menu_choice.png")); // кнопки
+            im1 = ImageIO.read(new File("res/stars.png")); // задний фон
+            im2 = ImageIO.read(new File("res/star_1.png")); // кусок звезды
+            im3 = ImageIO.read(new File("res/star_2.png")); // это тоже кусок звезды
+            im4 = ImageIO.read(new File("res/star_3.png")); // ещё кусок звезды
+            im5 = ImageIO.read(new File("res/menu_button.png")); // кнопка
+            im6 = ImageIO.read(new File("res/menu_all_buttons.png")); // кнопки
+            im7 = ImageIO.read(new File("res/choice1.png")); // кнопки
+            im8 = ImageIO.read(new File("res/choice2.png")); // кнопки
+            im9 = ImageIO.read(new File("res/choice3.png")); // кнопки
+            im10 = ImageIO.read(new File("res/menu_choice.png")); // кнопки
             im11 = ImageIO.read(new File("fighter/sh0.png"));
             im12 = ImageIO.read(new File("cruiser/sh0.png"));
             im13 = ImageIO.read(new File("battleship/sh0.png"));
+            im14 = ImageIO.read(new File("res/text_-_menu.png"));
+            im15 = ImageIO.read(new File("res/text_-_3.png"));
+            im16 = ImageIO.read(new File("res/text_-_ships.png"));
         } catch (Exception e) {
             System.err.println("У вас траблы с текстурками");
         }
@@ -162,6 +168,7 @@ public class Launcher extends JFrame {
         g2.setComposite(ac);
         g2.drawImage(im4, 0, 0, (int) (im4.getWidth(null) * k), (int) (im2.getHeight(null) * f), null);
         g2.drawImage(im6, 0, 0, (int) (im6.getWidth(null) * k), (int) (im6.getHeight(null) * f), null);
+
 
         if ((mausY >= im1.getHeight(null) * f / 5) &&
                 (mausY <= im1.getHeight(null) * f * 2 / 5) &&
@@ -181,15 +188,12 @@ public class Launcher extends JFrame {
                 (mausX >= im1.getWidth(null) * k / 10)) {
             g2.drawImage(im9, 0, 0, (int) (im9.getWidth(null) * k), (int) (im9.getHeight(null) * f), null);
         }
+        g2.drawImage(im14, 0, 0, (int) (im14.getWidth(null) * k), (int) (im14.getHeight(null) * f), null);
     }
 
     public void scen0(Graphics2D g2) {
         g2.drawImage(im1, 0, 0, (int) (im1.getWidth(null) * k), (int) (im1.getHeight(null) * f), null);
-        g2.drawImage(im5,
-                (int) ((im1.getWidth(null) / 2 - im5.getWidth(null) / 2) * k),
-                (int) (im1.getHeight(null) / 2 * f),
-                (int) (im5.getWidth(null) * k), (int) (im5.getHeight(null) * f), null
-        );
+
         text.setBounds((int) ((im1.getWidth(null) / 2 - im5.getWidth(null) / 2) * k),
                 (int) ((im1.getHeight(null) / 2 - im5.getHeight(null)) * f - 10),
                 (int) (im5.getWidth(null) * k),
@@ -206,6 +210,16 @@ public class Launcher extends JFrame {
                     (int) (im5.getWidth(null) * k), (int) (im5.getHeight(null) * f), null
             );
         }
+        g2.drawImage(im5,
+                (int) ((im1.getWidth(null) / 2 - im5.getWidth(null) / 2) * k),
+                (int) (im1.getHeight(null) / 2 * f),
+                (int) (im5.getWidth(null) * k), (int) (im5.getHeight(null) * f), null
+        );
+        g2.drawImage(im15,
+                (int) ((im1.getWidth(null) / 2 - im15.getWidth(null) / 2) * k),
+                (int) (im1.getHeight(null) / 2 * f),
+                (int) (im15.getWidth(null) * k), (int) (im15.getHeight(null) * f), null
+        );
     }
 
     public void scen2(Graphics2D g2) {
@@ -259,6 +273,7 @@ public class Launcher extends JFrame {
                     (int) (im1.getHeight(null) * 3 * f / 5), null
             );
         }
+        g2.drawImage(im16, 0, 0, (int) (im16.getWidth(null) * k), (int) (im16.getHeight(null) * f), null);
     }
 
     public void click() {

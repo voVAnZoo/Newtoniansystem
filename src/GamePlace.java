@@ -15,9 +15,9 @@ public class GamePlace {
     Image img;
     public GamePlace(){
         try {
-            img = ImageIO.read(new File("maxresdefault.png"));
+            img = ImageIO.read(new File("res/maxresdefault.png"));
         }catch (Exception e) {
-
+            System.out.println("Траблы с текстурками");
         }
     }
     List<Subject> allsub = new ArrayList<Subject>();

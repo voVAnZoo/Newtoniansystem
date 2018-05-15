@@ -4,7 +4,7 @@
     <root id="archive" name="Newtoniansystem.jar">
       <element id="module-output" name="Newtoniansystem" />
       <element id="file-copy" path="$PROJECT_DIR$/maxresdefault.jpg" />
-      <element id="file-copy" path="$PROJECT_DIR$/st.png" />
+      <element id="file-copy" path="$PROJECT_DIR$/res/st.png" />
     </root>
   </artifact>
 </component>
