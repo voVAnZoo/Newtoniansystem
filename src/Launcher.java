@@ -121,22 +121,22 @@ public class Launcher extends JFrame {
 
     public static void init() {
         try {
-            im1 = ImageIO.read(new File("res/stars.png")); // задний фон
-            im2 = ImageIO.read(new File("res/star_1.png")); // кусок звезды
-            im3 = ImageIO.read(new File("res/star_2.png")); // это тоже кусок звезды
-            im4 = ImageIO.read(new File("res/star_3.png")); // ещё кусок звезды
-            im5 = ImageIO.read(new File("res/menu_button.png")); // кнопка
-            im6 = ImageIO.read(new File("res/menu_all_buttons.png")); // кнопки
-            im7 = ImageIO.read(new File("res/choice1.png")); // кнопки
-            im8 = ImageIO.read(new File("res/choice2.png")); // кнопки
-            im9 = ImageIO.read(new File("res/choice3.png")); // кнопки
-            im10 = ImageIO.read(new File("res/menu_choice.png")); // кнопки
+            im1 = ImageIO.read(new File("res/launch/stars.png")); // задний фон
+            im2 = ImageIO.read(new File("res/launch/star_1.png")); // кусок звезды
+            im3 = ImageIO.read(new File("res/launch/star_2.png")); // это тоже кусок звезды
+            im4 = ImageIO.read(new File("res/launch/star_3.png")); // ещё кусок звезды
+            im5 = ImageIO.read(new File("res/launch/menu_button.png")); // кнопка
+            im6 = ImageIO.read(new File("res/launch/menu_all_buttons.png")); // кнопки
+            im7 = ImageIO.read(new File("res/launch/choice1.png")); // кнопки
+            im8 = ImageIO.read(new File("res/launch/choice2.png")); // кнопки
+            im9 = ImageIO.read(new File("res/launch/choice3.png")); // кнопки
+            im10 = ImageIO.read(new File("res/launch/menu_choice.png")); // кнопки
             im11 = ImageIO.read(new File("fighter/sh0.png"));
             im12 = ImageIO.read(new File("cruiser/sh0.png"));
             im13 = ImageIO.read(new File("battleship/sh0.png"));
-            im14 = ImageIO.read(new File("res/text_-_menu.png"));
-            im15 = ImageIO.read(new File("res/text_-_3.png"));
-            im16 = ImageIO.read(new File("res/text_-_ships.png"));
+            im14 = ImageIO.read(new File("res/launch/text_-_menu.png"));
+            im15 = ImageIO.read(new File("res/launch/text_-_3.png"));
+            im16 = ImageIO.read(new File("res/launch/text_-_ships.png"));
         } catch (Exception e) {
             System.err.println("У вас траблы с текстурками");
         }

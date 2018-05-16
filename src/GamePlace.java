@@ -12,10 +12,17 @@ import java.util.List;
  */
 public class GamePlace {
 
-    Image img;
+    Image img, im1, im2, im3, im4, im5, im6, im7;
     public GamePlace(){
         try {
             img = ImageIO.read(new File("res/maxresdefault.png"));
+            im1 = ImageIO.read(new File("res/button.png"));
+            im2 = ImageIO.read(new File("res/choice.png"));
+            im3 = ImageIO.read(new File("res/forvard_speed_blue.png"));
+            im4 = ImageIO.read(new File("res/grid_speed.png"));
+            im5 = ImageIO.read(new File("res/reverse_speed_red.png"));
+            im6 = ImageIO.read(new File("res/maxresdefault.png"));
+            im7 = ImageIO.read(new File("res/maxresdefault.png"));
         }catch (Exception e) {
             System.out.println("Траблы с текстурками");
         }
@@ -54,5 +61,9 @@ public class GamePlace {
 
     public void add(Psub s){
         allplayer.add(s);
+    }
+
+    public void interfce(Graphics2D g2){
+
     }
 }
