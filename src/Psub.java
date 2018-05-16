@@ -535,9 +535,4 @@ public class Psub extends Subject {
             e.printStackTrace();
         }
     }
-
-    public void intefrace(){
-
-    }
-
 }

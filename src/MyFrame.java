@@ -31,9 +31,9 @@ public class MyFrame extends JFrame {
         setContentPane(graf);
 
         addKeyListener(new MyKeyListener());
-        addMouseListener(new MyMouseListener());
-        addMouseWheelListener(new MyMouseWheelListener());
-        addMouseMotionListener(new MyMouseMotionListener());
+        graf.addMouseListener(new MyMouseListener());
+        graf.addMouseWheelListener(new MyMouseWheelListener());
+        graf.addMouseMotionListener(new MyMouseMotionListener());
 
         setVisible(true);
     }

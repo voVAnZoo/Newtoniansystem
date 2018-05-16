@@ -34,8 +34,8 @@ public class Data {
     public static boolean clientWork = false;
 
     public static class sSize{
-        public static int width = 19000;
-        public static int height = 10000;
+        public static int width = 1900;
+        public static int height = 1000;
     }
 
 }

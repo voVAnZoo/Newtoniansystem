@@ -13,22 +13,7 @@ import java.io.File;
  */
 public class Launcher extends JFrame {
     static Dimension sSize = Toolkit.getDefaultToolkit().getScreenSize();
-    static Image im1;
-    static Image im2;
-    static Image im3;
-    static Image im4;
-    static Image im5;
-    static Image im6;
-    static Image im7;
-    static Image im8;
-    static Image im9;
-    static Image im10;
-    static Image im11;
-    static Image im12;
-    static Image im13;
-    static Image im14;
-    static Image im15;
-    static Image im16;
+    static Image im1, im2, im3, im4, im5, im6, im7, im8, im9, im10, im11, im12, im13, im14, im15, im16;
     JTextField text = new JTextField();
     int scen;
     int mausX;
@@ -319,20 +304,22 @@ public class Launcher extends JFrame {
                         (mausX <= im1.getWidth(null) * k / 2) &&
                         (mausX >= im1.getWidth(null) * k / 10)) {
                     Main.init(1);
+                    setVisible(false);
                 }
                 if ((mausY >= im1.getHeight(null) * f * 2 / 5) &&
                         (mausY <= im1.getHeight(null) * f * 3 / 5) &&
                         (mausX <= im1.getWidth(null) * k / 2) &&
                         (mausX >= im1.getWidth(null) * k / 10)){
                     Main.init(2);
+                    setVisible(false);
                 }
                 if ((mausY >= im1.getHeight(null) * f * 3 / 5) &&
                         (mausY <= im1.getHeight(null) * f * 4 / 5) &&
                         (mausX <= im1.getWidth(null) * k / 2) &&
                         (mausX >= im1.getWidth(null) * k / 10)) {
-                    Main.init(3);
+                    //Main.init(3);
                 }
-                setVisible(false);
+
                 break;
 
         }
